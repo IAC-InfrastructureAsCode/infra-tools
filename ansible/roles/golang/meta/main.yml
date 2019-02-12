@@ -1,0 +1,19 @@
+galaxy_info:
+  author: ZeroC0D3
+  description: Golang installation.
+  company: ZeroC0D3Lab
+
+  license: license (Apache v2)
+
+  min_ansible_version: 1.2
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - xenial
+        - bionic
+
+  galaxy_tags:
+    - golang
+
+dependencies: []

@@ -1,0 +1,5 @@
+##### DocKube #####
+ansible-playbook -i datacenter/dockube/inventory.ini deploy/dockube-nsq.yml --limit "172.212.0.6"
+ansible-playbook -i datacenter/dockube/inventory.ini deploy/dockube-golang.yml
+ansible-playbook -i datacenter/dockube/inventory.ini deploy/dockube-docker.yml
+

@@ -1,0 +1,5 @@
+---
+# tasks file for ansible-golang
+
+- include: 01_update.yml
+- include: 02_setup.yml

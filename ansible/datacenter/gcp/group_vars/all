@@ -1,0 +1,18 @@
+---
+
+# time zone and locale setup
+locale: en_US.UTF-8
+timezone: Asia/Jakarta
+env: gcp
+nopass_group: sudo
+nopass_staff: staff
+datacenter: dc-gcp
+ansible_ssh_private_key_file: keys/gcp.pem
+consul_host: 10.202.1.212:8500
+consul_dc: gcp
+consul_url: consul.gcp.local
+consul_hosts:
+    - 10.202.1.1
+logstokeep: 7
+remote_user: ubuntu
+trusted_ips: 10.202.16.0/22

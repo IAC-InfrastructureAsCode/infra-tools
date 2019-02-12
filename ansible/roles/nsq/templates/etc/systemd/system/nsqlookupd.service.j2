@@ -1,0 +1,24 @@
+# {{ansible_managed}}
+
+[Unit]
+Description=NSQ nsqlookupd service
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+LimitNOFILE=50000
+Restart=on-abort
+#ExecStartPre=/usr/bin/test -x {{ nsq__install_directory }}/{{ nsq__release }}/bin/nsqlookupd || { stop; exit 0; }
+ExecStart={{ nsq__install_directory }}/{{ nsq__release }}/bin/nsqlookupd {{ nsq__nsqlookupd_opts }}
+
+Restart=always
+RestartSec=20
+TimeoutSec=300
+User={{ nsq__owner }}
+Group={{ nsq__group }}
+StandardOutput=journal
+StandardError=journal
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target

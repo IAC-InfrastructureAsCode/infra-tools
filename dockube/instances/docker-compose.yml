@@ -1,0 +1,55 @@
+version: '2'   # IT MUST version 2 for support "ip_range"
+
+#================================================================================================
+# NETWORK SETUP
+#================================================================================================
+networks:
+  dockube-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.212.0.0/16      # 65534 Hosts / Net
+          ip_range: 172.212.5.0/24
+          gateway: 172.212.5.254
+
+#================================================================================================
+# VOLUME SETUP
+#================================================================================================
+volumes:
+  dockube-master:
+    driver: local
+
+services:
+#================================================================================================
+# MASTER
+#================================================================================================
+  dockube-master:
+    restart: unless-stopped
+    build:
+      context: .
+      args:
+        - INSTALL_GOLANG=true
+    container_name: dockube_master
+    hostname: dockube-master
+    #domainname: dockube-master
+    expose:
+      - "22"
+      - "22/tcp"
+      - "2379"
+      - "2379/tcp"
+      - "6443"
+      - "6443/tcp"
+      - "10251"
+      - "10251/tcp"
+    ports:
+      - 221:22/tcp
+    ### DO NOT USE FOR "docker registry / build images" ###
+    # volumes:
+    #   - /etc/localtime:/etc/localtime:ro
+    #   - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - UBUNTU_VERSION=16.04
+    privileged: true
+    networks:
+      dockube-net:
+        ipv4_address: 172.212.0.6

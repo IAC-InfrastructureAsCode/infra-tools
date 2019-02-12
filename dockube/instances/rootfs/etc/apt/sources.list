@@ -1,0 +1,10 @@
+deb http://buaya.klas.or.id/ubuntu/ xenial main restricted universe multiverse
+deb http://buaya.klas.or.id/ubuntu/ xenial-updates main restricted universe multiverse
+deb http://buaya.klas.or.id/ubuntu/ xenial-security main restricted universe multiverse
+deb http://buaya.klas.or.id/ubuntu/ xenial-backports main restricted universe multiverse
+deb http://buaya.klas.or.id/ubuntu/ xenial-proposed main restricted universe multiverse
+## deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+# deb-src [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+## deb https://download.docker.com/linux/ubuntu xenial stable
+# deb-src https://download.docker.com/linux/ubuntu xenial stable
+# deb-src https://download.docker.com/linux/ubuntu xenial stable

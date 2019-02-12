@@ -1,0 +1,18 @@
+---
+
+# time zone and locale setup
+locale: en_US.UTF-8
+timezone: Asia/Jakarta
+env: dockube
+nopass_group: sudo
+nopass_staff: staff
+datacenter: dc-dockube
+ansible_ssh_private_key_file: keys/dockube.pem
+consul_host: 172.212.1.212:8500
+consul_dc: dockube
+consul_url: consul.dockube.local
+consul_hosts:
+    - 172.212.1.1
+logstokeep: 7
+remote_user: ubuntu
+trusted_ips: 172.212.16.0/22

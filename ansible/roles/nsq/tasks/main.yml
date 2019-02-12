@@ -1,0 +1,51 @@
+---
+# tasks file for ansible-nsq
+
+- name: "Downloading NSQ binaries"
+  get_url:
+    url: "{{ nsq__download_url }}"
+    dest: "/tmp/{{ nsq__release_archive }}"
+    owner: "{{ nsq__owner }}"
+    group: "{{ nsq__group }}"
+    mode: 0644
+
+- name: "Creating NSQ data directory"
+  file:
+    path: "{{ nsq__data_directory }}"
+    owner: "{{ nsq__owner }}"
+    group: "{{ nsq__group }}"
+    mode: "{{ nsq__data_directory_mode }}"
+    state: directory
+
+- name: "Creating NSQ config directory"
+  file:
+    path: "{{ nsq__config_directory }}"
+    owner: "{{ nsq__owner }}"
+    group: "{{ nsq__group }}"
+    mode: "{{ nsq__config_directory_mode }}"
+    state: directory
+
+- name: Unarchive NSQ
+  unarchive:
+    copy: no
+    src: "/tmp/{{ nsq__release_archive }}"
+    dest: "{{ nsq__install_directory }}"
+    creates: "{{ nsq__install_directory }}/{{ nsq__release }}/bin"
+
+- name: "Link NSQ binaries to /usr/local/bin"
+  file:
+    src: "{{ nsq__install_directory }}/{{ nsq__release }}/bin/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+    owner: "{{ nsq__owner }}"
+    group: "{{ nsq__group }}"
+    state: link
+  with_items: "{{ nsq__binaries }}"
+
+- include: 01_nsqlookupd.yml
+  when: nsq__nsqlookupd_install
+
+- include: 02_nsqd.yml
+  when: nsq__nsqd_install
+
+- include: 03_nsqadmin.yml
+  when: nsq__nsqadmin_install

@@ -1,0 +1,6 @@
+cache/
+data/
+log/
+vendor/
+workspace/
+.env

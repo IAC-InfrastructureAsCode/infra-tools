@@ -1,0 +1,17 @@
+---
+- name: apt-get update
+  apt:
+  update_cache: yes
+  dpkg_options: 'force-confold,force-confdef'
+  when: env == 'dockube'
+
+- name: Install g++, gcc, libc6-dev, make, pkg-config
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - g++
+    - gcc
+    - libc6-dev
+    - make
+    - pkg-config
