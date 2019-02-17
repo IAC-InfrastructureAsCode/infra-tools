@@ -1,0 +1,18 @@
+---
+# defaults file for ansible-golang
+
+golang_owner: root
+golang_group: root
+
+golang_version: 1.11.1
+golang_os: linux
+golang_arch: amd64
+golang_sha256: 2871270d8ff0c8c69f161aaae42f9f28739855ff5c5204752a8d92a1c9f63993
+
+os_path_binary: "/usr/local"
+golang_gopath: "$HOME/go"
+golang_goroot: "{{ os_path_binary }}/go"
+golang_path: "$PATH:$GOROOT/bin:$GOPATH/bin"
+
+golang_directory_mode: 0644
+golang_profile: "$HOME/.profile"

@@ -1,0 +1,23 @@
+# {{ansible_managed}}
+
+[Unit]
+Description=NSQ nsqadmin service
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+LimitNOFILE=50000
+Restart=on-abort
+#ExecStartPre=/usr/bin/test -x {{ nsq_install_directory }}/{{ nsq_release }}/bin/nsqadmin || { stop; exit 0; }
+ExecStart={{ nsq_install_directory }}/{{ nsq_release }}/bin/nsqadmin {{ nsq_nsqadmin_opts }} {% if nsqlookupd_role and nsq_lookupd_http_addresses | length > 0 %}{% for item in nsq_lookupd_http_addresses %}-lookupd-http-address={{ item }}:{{ nsq_lookupd_http_port }} {% endfor %}{% endif %}
+
+RestartSec=20
+TimeoutSec=300
+User={{ nsq_owner }}
+Group={{ nsq_group }}
+StandardOutput=journal
+StandardError=journal
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,12 @@
+---
+- name: start nsqd
+  service: name=nsqd state=started
+  ignore_errors: yes
+
+- name: start nsqlookupd
+  service: name=nsqlookupd state=started
+  ignore_errors: yes
+
+- name: start nsqadmin
+  service: name=nsqadmin state=started
+  ignore_errors: yes

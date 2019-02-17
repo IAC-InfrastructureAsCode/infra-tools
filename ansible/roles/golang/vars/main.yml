@@ -1,6 +1,0 @@
----
-# vars file for ansible-golang
-
-golang__release: "go{{ golang__version }}.{{ golang__os }}-{{ golang__arch }}"
-golang__release_archive: "{{ golang__release }}.tar.gz"
-golang__download_url: "https://storage.googleapis.com/golang/{{ golang__release_archive }}"

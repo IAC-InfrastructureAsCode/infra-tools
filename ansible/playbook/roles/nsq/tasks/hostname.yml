@@ -1,0 +1,13 @@
+---
+- name: set hostname
+  hostname: name="{{ ansible_hostname | regex_replace('NSQ',nsqowner) }}"
+  when: nsqowner is defined and datacenter == "Biznet"
+  register: esxhost
+
+- name: set in /etc/hosts
+  lineinfile: regexp='^127.0.0.1' dest=/etc/hosts line="127.0.0.1   localhost   {{ esxhost.name }}"
+  when: esxhost.changed
+
+- name: set in /etc/hosts
+  replace: regexp="{{ansible_hostname}}" dest=/etc/hosts replace="{{ esxhost.name }}"
+  when: esxhost.changed

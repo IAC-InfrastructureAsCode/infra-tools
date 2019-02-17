@@ -1,0 +1,7 @@
+---
+- name: copy nsqlookupd scripts
+  copy: src="init/{{ item }}.conf" dest=/etc/init/{{item}}.conf
+  with_items:
+    - nsqlookupd
+  notify: restart nsqlookupd
+  when: nsqlookupd_role is defined

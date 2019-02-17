@@ -1,0 +1,15 @@
+---
+- name: copy init scripts
+  template: src="{{ item }}.conf.j2" dest=/etc/init/{{item}}.conf
+  with_items:
+    - nsqd
+  notify: restart nsqd
+  tags: nsq-config
+
+- name: copy init scripts iris
+  template: src="{{ item }}.conf.j2" dest=/etc/init/nsqd.conf
+  with_items:
+    - nsqd-iris
+  notify: restart nsqd
+  tags: nsq-iris
+  when: nsqiris is defined

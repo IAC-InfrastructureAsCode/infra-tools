@@ -1,0 +1,15 @@
+---
+- name: Setup Docker & Docker Compose
+  hosts: dockube-all
+  #remote_user: '{{ remote_user }}'
+  sudo: yes
+
+  vars:
+    app_name: dockube-docker
+    docker_edition: ce
+    docker_channel: ["stable"]
+    docker_version: "18.06.1"
+    docker_compose_version: "1.23.2"
+
+  roles:
+    - docker

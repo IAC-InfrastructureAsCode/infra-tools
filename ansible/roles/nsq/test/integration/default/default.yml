@@ -1,7 +1,0 @@
----
-- hosts: localhost
-  roles:
-    - role: ansible-nsq
-      nsq__version: 0.3.8
-      nsq__go_version: go1.6.2
-      nsq__arch: linux-amd64

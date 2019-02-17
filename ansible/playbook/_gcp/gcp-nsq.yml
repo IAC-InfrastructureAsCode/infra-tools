@@ -1,0 +1,14 @@
+---
+- name: Setup NSQ Server with required packages
+  hosts: gcp-all
+  #remote_user: '{{ remote_user }}'
+  sudo: yes
+
+  vars:
+    app_name: gcp-nsq
+    nsq_network_interface: dockube-net
+    nsq_network_ip_protocol: ipv4
+    nsq_network_address: 172.200.0.89
+
+  roles:
+    - nsq

@@ -1,0 +1,66 @@
+---
+
+docker_edition: "ce"
+docker_channel: ["stable"]
+docker_version: ""
+docker_state: "present"
+
+docker_compose_version: ""
+
+docker_users: ["{{ ansible_env.SUDO_USER | d('root') }}"]
+
+docker_registries: []
+
+docker_default_daemon_json: |
+  "log-driver": "journald"
+
+docker_daemon_json: ""
+
+docker_daemon_flags:
+  - "-H unix://"
+
+docker_daemon_environment: []
+
+docker_systemd_override: ""
+
+docker_cron_jobs_prune_flags: "af"
+docker_cron_jobs:
+  - name: "Docker disk clean up"
+    job: "docker system prune -{{ docker_cron_jobs_prune_flags }} > /dev/null 2>&1"
+    schedule: ["0", "0", "*", "*", "0"]
+    cron_file: "docker-disk-clean-up"
+    user: "{{ (docker_users | first) | d('root') }}"
+
+docker_package_dependencies:
+  #- "apt-transport-https"
+  - "ca-certificates"
+  - "cron"
+  - "gnupg"
+  - "gnupg2"
+  #- "software-properties-common"
+
+docker_apt_key_id: "9DC858229FC7DD38854AE2D88D81803C0EBFCD88"
+docker_apt_key_url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
+docker_apt_repository: >
+  deb [arch=amd64]
+  https://download.docker.com/linux/{{ ansible_distribution | lower }}
+  {{ ansible_distribution_release }} {{ docker_channel | join (' ') }}
+
+docker_pip_dependencies:
+  - "python-setuptools"
+  - "python{{ '3' if ansible_python.version.major == 3 else '' }}-pip"
+
+docker_pip_virtualenv: "/usr/local/lib/docker/virtualenv"
+
+docker_default_pip_packages:
+  - name: "docker"
+    state: "{{ docker_pip_docker_state }}"
+  - name: "docker-compose"
+    version: "{{ docker_compose_version }}"
+    path: "/usr/local/bin/docker-compose"
+    src: "{{ docker_pip_virtualenv + '/bin/docker-compose' }}"
+    state: "{{ docker_pip_docker_compose_state }}"
+docker_pip_packages: []
+
+docker_pip_docker_state: "present"
+docker_pip_docker_compose_state: "present"

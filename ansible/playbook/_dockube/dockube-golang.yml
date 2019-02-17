@@ -1,0 +1,12 @@
+---
+- name: Setup Golang
+  hosts: dockube-all
+  #remote_user: '{{ remote_user }}'
+  sudo: yes
+
+  vars:
+    app_name: dockube-golang
+    golang_version: 1.11.1
+
+  roles:
+    - golang

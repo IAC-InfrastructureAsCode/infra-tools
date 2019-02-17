@@ -1,0 +1,7 @@
+---
+- name: copy nsqadmin scripts
+  copy: src="init/{{ item }}.conf" dest=/etc/init/{{item}}.conf
+  with_items:
+    - nsqadmin
+  notify: restart nsqadmin
+  when: nsqadmin is defined

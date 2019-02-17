@@ -1,0 +1,11 @@
+{
+{%- if docker_default_daemon_json | d() -%}
+{{ docker_default_daemon_json | indent(2, true) }}
+{%- endif -%}
+{%- if (docker_default_daemon_json | d()) and (docker_daemon_json | d()) -%}
+,
+{%- endif -%}
+{%- if docker_daemon_json | d() -%}
+{{ docker_daemon_json | indent(2, true) }}
+{%- endif -%}
+}

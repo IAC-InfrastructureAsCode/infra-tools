@@ -1,0 +1,68 @@
+---
+# tasks file for ansible-nsq
+- include: hostname.yml tags=nsqhostname
+
+- name: "Downloading NSQ binaries"
+  get_url:
+    url: "{{ nsq_download_url }}"
+    dest: "/tmp/{{ nsq_release_archive }}"
+    owner: "{{ nsq_owner }}"
+    group: "{{ nsq_group }}"
+    mode: 0644
+
+- name: "Creating NSQ data directory"
+  file:
+    path: "{{ nsq_data_directory }}"
+    owner: "{{ nsq_owner }}"
+    group: "{{ nsq_group }}"
+    mode: "{{ nsq_data_directory_mode }}"
+    state: directory
+
+- name: "Creating NSQ config directory"
+  file:
+    path: "{{ nsq_config_directory }}"
+    owner: "{{ nsq_owner }}"
+    group: "{{ nsq_group }}"
+    mode: "{{ nsq_config_directory_mode }}"
+    state: directory
+
+- name: Unarchive NSQ
+  unarchive:
+    copy: no
+    src: "/tmp/{{ nsq_release_archive }}"
+    dest: "{{ nsq_install_directory }}"
+    creates: "{{ nsq_install_directory }}/{{ nsq_release }}/bin"
+
+- name: "Link NSQ binaries to /usr/local/bin"
+  file:
+    src: "{{ nsq_install_directory }}/{{ nsq_release }}/bin/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+    owner: "{{ nsq_owner }}"
+    group: "{{ nsq_group }}"
+    state: link
+  with_items: "{{ nsq_binaries }}"
+
+#############
+# Ubuntu 14 #
+#############
+# - include: ubuntu14_init.yml
+
+# - include: ubuntu14_nsqadmin.yml
+#   when: nsqadmin_role
+
+# - include: ubuntu14_nsqlookup.yml
+#   when: nsqlookup_role
+
+# - include: ubuntu14_up_service.yml
+
+#############
+# Ubuntu 18 #
+#############
+- include: ubuntu18_nsqlookupd.yml
+  when: nsqlookupd_role
+
+- include: ubuntu18_nsqd.yml
+  when: nsqd_role
+
+- include: ubuntu18_nsqadmin.yml
+  when: nsqadmin_role
