@@ -1,5 +1,25 @@
 ##### DocKube #####
-ansible-playbook -i datacenter/dockube/inventory.ini deploy/dockube-nsq.yml --limit "172.212.0.6"
-ansible-playbook -i datacenter/dockube/inventory.ini deploy/dockube-golang.yml
-ansible-playbook -i datacenter/dockube/inventory.ini deploy/dockube-docker.yml
+### Master
+ansible-playbook -i datacenter/dockube/inventory.ini playbook/_dockube/dockube-nsq.yml --limit "172.212.0.6"
+### Node
+ansible-playbook -i datacenter/dockube/inventory.ini playbook/_dockube/dockube-nsq.yml --limit "172.212.0.8"
+### NFS
+ansible-playbook -i datacenter/dockube/inventory.ini playbook/_dockube/dockube-nsq.yml --limit "172.212.0.11"
 
+### All
+ansible-playbook -i datacenter/dockube/inventory.ini playbook/_dockube/dockube-nsq.yml
+ansible-playbook -i datacenter/dockube/inventory.ini playbook/_dockube/dockube-golang.yml
+ansible-playbook -i datacenter/dockube/inventory.ini playbook/_dockube/dockube-etcd.yml
+ansible-playbook -i datacenter/dockube/inventory.ini playbook/_dockube/dockube-docker.yml
+
+##### GCP #####
+### Staging
+ansible-playbook -i datacenter/gcp/inventory.ini playbook/_gcp/gcp-nsq.yml --limit "172.200.0.89"
+ansible-playbook -i datacenter/gcp/inventory.ini playbook/_gcp/gcp-golang.yml --limit "172.200.0.89"
+
+### Production
+ansible-playbook -i datacenter/gcp/inventory.ini playbook/_gcp/gcp-nsq.yml --limit "172.200.0.65"
+ansible-playbook -i datacenter/gcp/inventory.ini playbook/_gcp/gcp-golang.yml --limit "172.200.0.65"
+
+### All
+ansible-playbook -i datacenter/gcp/inventory.ini playbook/_gcp/gcp-docker.yml
