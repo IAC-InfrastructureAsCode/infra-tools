@@ -22,10 +22,10 @@ remote_user=root  # root / ubuntu
 * Deploy Ansible Playbook
 
 ```
-ansible-playbook -i datacenter/{{ name_datacenter }}/inventory.ini deploy/{{ name_deploy }}.yml --limit "{{ ip-1,ip-2,ip-n }}"
+ansible-playbook -i datacenter/{{ datacenter_name }}/inventory.ini deploy/{{ playbook_name }}.yml --limit "{{ ip-1,ip-2,ip-n }}"
 -----
-ansible-playbook -i datacenter/dockube/inventory.ini deploy/dockube-nsq.yml --limit "172.212.0.6"
-ansible-playbook -i datacenter/dockube/inventory.ini deploy/dockube-golang.yml
+ansible-playbook -i datacenter/dockube/inventory.ini playbook/_dockube/dockube-nsq.yml --limit "172.212.0.6"
+ansible-playbook -i datacenter/dockube/inventory.ini playbook/_dockube/dockube-golang.yml
 ```
 
 ### **How To Run DocKube**
@@ -51,7 +51,7 @@ PATH_HOME=`echo $HOME`
 
 CONTAINER_PRODUCTION="portainer dockube-master dockube-node dockube-nfs"
 CONTAINER_STAGING="portainer dockube-master dockube-node dockube-nfs"
-CONTAINER_DEVELOPMENT="portainer dockube-master dockube-node"
+CONTAINER_DEVELOPMENT="portainer dockube-master dockube-node dockube-nfs"
 ```
 
 * Running **DocKube** Services:
