@@ -16,3 +16,13 @@ consul_hosts:
 logstokeep: 7
 remote_user: ubuntu
 trusted_ips: 10.201.16.0/22
+
+nsqlookupd_aliyun: nsqlookupd.nsq.service.aliyun.consul
+nsqlookupd_aws: nsqlookupd.nsq.service.tkp-dc.consul
+nsqlookupd_gcp: nsqlookupd.nsq.service.{{datacenter}}.consul
+nsq_lookupd_tcp_addresses:
+  - 127.0.0.1
+  - '{{ nsqlookupd_aliyun }}'
+  - '{{ nsqlookupd_aws }}'
+  - '{{ nsqlookupd_gcp }}'
+  - '{{ nsq_network_address }}'

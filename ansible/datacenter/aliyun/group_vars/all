@@ -3,27 +3,25 @@
 # time zone and locale setup
 locale: en_US.UTF-8
 timezone: Asia/Jakarta
-env: gcp
+env: aliyun
 nopass_group: sudo
 nopass_staff: staff
-datacenter: dc-gcp
-ansible_ssh_private_key_file: keys/gcp.pem
-consul_host: 172.200.1.212:8500
-consul_dc: gcp
-consul_url: consul.gcp.local
+datacenter: dc-aliyun
+ansible_ssh_private_key_file: keys/aliyun.pem
+consul_host: 172.201.1.212:8500
+consul_dc: aliyun
+consul_url: consul.aliyun.local
 consul_hosts:
-    - 172.200.1.1
+    - 172.201.1.1
 logstokeep: 7
 remote_user: ubuntu
-trusted_ips: 172.200.16.0/22
+trusted_ips: 172.201.16.0/22
 
 nsqlookupd_aliyun: nsqlookupd.nsq.service.aliyun.consul
 nsqlookupd_aws: nsqlookupd.nsq.service.tkp-dc.consul
 nsqlookupd_gcp: nsqlookupd.nsq.service.{{datacenter}}.consul
 nsq_lookupd_tcp_addresses:
   - 127.0.0.1
-  - 172.200.0.65
-  - 172.200.0.89
   - '{{ nsqlookupd_aliyun }}'
   - '{{ nsqlookupd_aws }}'
   - '{{ nsqlookupd_gcp }}'
