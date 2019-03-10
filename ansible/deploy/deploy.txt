@@ -1,25 +1,44 @@
+###############################
+#       Static Inventory      #
+###############################
 ##### DocKube #####
 ### Master
-ansible-playbook -i datacenter/dockube/inventory.ini playbook/_dockube/dockube-nsq.yml --limit "172.212.0.6"
+ansible-playbook -i inventories/dockube/inventory.ini playbook/dockube_nsq-nsqadmin.yaml --limit "172.212.0.6"
 ### Node
-ansible-playbook -i datacenter/dockube/inventory.ini playbook/_dockube/dockube-nsq.yml --limit "172.212.0.8"
+ansible-playbook -i inventories/dockube/inventory.ini playbook/dockube_nsq-nsqd.yaml --limit "172.212.0.8"
 ### NFS
-ansible-playbook -i datacenter/dockube/inventory.ini playbook/_dockube/dockube-nsq.yml --limit "172.212.0.11"
-
+ansible-playbook -i inventories/dockube/inventory.ini playbook/dockube_nsq-nsqlookupd.yaml --limit "172.212.0.11"
 ### All
-ansible-playbook -i datacenter/dockube/inventory.ini playbook/_dockube/dockube-nsq.yml
-ansible-playbook -i datacenter/dockube/inventory.ini playbook/_dockube/dockube-golang.yml
-ansible-playbook -i datacenter/dockube/inventory.ini playbook/_dockube/dockube-etcd.yml
-ansible-playbook -i datacenter/dockube/inventory.ini playbook/_dockube/dockube-docker.yml
+ansible-playbook -i inventories/dockube/inventory.ini playbook/dockube_nsq-nsqadmin.yaml
+ansible-playbook -i inventories/dockube/inventory.ini playbook/dockube_nsq-nsqd.yaml
+ansible-playbook -i inventories/dockube/inventory.ini playbook/dockube_nsq-nsqlookupd.yaml
+ansible-playbook -i inventories/dockube/inventory.ini playbook/dockube_golang.yaml
+ansible-playbook -i inventories/dockube/inventory.ini playbook/dockube_docker.yaml
+
+##### {{datacenter}} #####
+ansible-playbook -i inventories/{{datacenter}}/inventory.ini playbook/tag_nsq-nsqadmin.yaml
+ansible-playbook -i inventories/{{datacenter}}/inventory.ini playbook/tag_nsq-nsqd.yaml
+ansible-playbook -i inventories/{{datacenter}}/inventory.ini playbook/tag_nsq-nsqlookupd.yaml
+ansible-playbook -i inventories/{{datacenter}}/inventory.ini playbook/tag_golang.yaml
+ansible-playbook -i inventories/{{datacenter}}/inventory.ini playbook/tag_docker.yaml
 
 ##### GCP #####
-### Staging
-ansible-playbook -i datacenter/gcp/inventory.ini playbook/_gcp/gcp-nsq.yml --limit "172.200.0.89"
-ansible-playbook -i datacenter/gcp/inventory.ini playbook/_gcp/gcp-golang.yml --limit "172.200.0.89"
+ansible-playbook -i inventories/gcp/inventory.ini playbook/tag_nsq-nsqadmin.yaml
+ansible-playbook -i inventories/gcp/inventory.ini playbook/tag_nsq-nsqd.yaml
+ansible-playbook -i inventories/gcp/inventory.ini playbook/tag_nsq-nsqlookupd.yaml
+ansible-playbook -i inventories/gcp/inventory.ini playbook/tag_golang.yaml
+ansible-playbook -i inventories/gcp/inventory.ini playbook/tag_docker.yaml
 
-### Production
-ansible-playbook -i datacenter/gcp/inventory.ini playbook/_gcp/gcp-nsq.yml --limit "172.200.0.65"
-ansible-playbook -i datacenter/gcp/inventory.ini playbook/_gcp/gcp-golang.yml --limit "172.200.0.65"
 
-### All
-ansible-playbook -i datacenter/gcp/inventory.ini playbook/_gcp/gcp-docker.yml
+###############################
+#      Dynamic Inventory      #
+###############################
+##### {{datacenter}} #####
+ansible-playbook -i inventories/{{datacenter}}/ playbook/tag_docker.yaml
+
+##### GCP #####
+ansible-playbook -i inventories/gcp/ playbook/tag_docker.yaml
+ansible-playbook -i inventories/gcp/ playbook/tag_nsq-nsqadmin.yaml
+ansible-playbook -i inventories/gcp/ playbook/tag_nsq-nsqd.yaml
+ansible-playbook -i inventories/gcp/ playbook/tag_nsq-nsqlookupd.yaml
+ansible-playbook -i inventories/gcp/ playbook/tag_golang.yaml
