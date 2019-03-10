@@ -1,9 +1,9 @@
 ---
 # defaults file for ansible-nsq
 
-nsqd_role: true
-nsqadmin_role: true
-nsqlookupd_role: true
+nsqd_role: false
+nsqadmin_role: false
+nsqlookupd_role: false
 
 nsq_owner: root
 nsq_group: root
@@ -38,9 +38,9 @@ nsq_lookupd_tcp_port: 4160
 nsq_lookupd_http_port: 4161
 
 nsq_lookupd_tcp_addresses:
-  - "{{ nsqlookupd_aliyun }}"
-  - "{{ nsqlookupd_aws }}"
-  - "{{ nsqlookupd_gcp }}"
+  - "{{ nsqd_consul }}"
+  - "{{ nsqlookupd_consul }}"
+  - "{{ nsqadmin_consul }}"
   - "{{ nsq_network_address }}"
 
 nsq_lookupd_http_addresses:
