@@ -13,6 +13,12 @@ Collection sets of tools for provision & deployment instances, vm & container.
 * Terragrunt (Terraform Wrapper)
 
 ### **How To Run Ansible**
+* Goto folder `ansible`
+
+```
+cd ./ansible
+```
+
 * Setup `remote_user` in `ansible/ansible.cfg`
 
 ```
@@ -22,10 +28,50 @@ remote_user=root  # root / ubuntu
 * Deploy Ansible Playbook
 
 ```
-ansible-playbook -i datacenter/{{ datacenter_name }}/inventory.ini deploy/{{ playbook_name }}.yml --limit "{{ ip-1,ip-2,ip-n }}"
------
-ansible-playbook -i datacenter/dockube/inventory.ini playbook/_dockube/dockube-nsq.yml --limit "172.212.0.6"
-ansible-playbook -i datacenter/dockube/inventory.ini playbook/_dockube/dockube-golang.yml
+###############################
+#       Static Inventory      #
+###############################
+##### DocKube #####
+### Master
+ansible-playbook -i inventories/dockube/inventory.ini playbook/dockube_nsq-nsqadmin.yaml --limit "172.212.0.6"
+### Node
+ansible-playbook -i inventories/dockube/inventory.ini playbook/dockube_nsq-nsqd.yaml --limit "172.212.0.8"
+### NFS
+ansible-playbook -i inventories/dockube/inventory.ini playbook/dockube_nsq-nsqlookupd.yaml --limit "172.212.0.11"
+### All
+ansible-playbook -i inventories/dockube/inventory.ini playbook/dockube_nsq-nsqadmin.yaml
+ansible-playbook -i inventories/dockube/inventory.ini playbook/dockube_nsq-nsqd.yaml
+ansible-playbook -i inventories/dockube/inventory.ini playbook/dockube_nsq-nsqlookupd.yaml
+ansible-playbook -i inventories/dockube/inventory.ini playbook/dockube_golang.yaml
+ansible-playbook -i inventories/dockube/inventory.ini playbook/dockube_docker.yaml
+
+##### {{datacenter}} #####
+ansible-playbook -i inventories/{{datacenter}}/inventory.ini playbook/tag_nsq-nsqadmin.yaml
+ansible-playbook -i inventories/{{datacenter}}/inventory.ini playbook/tag_nsq-nsqd.yaml
+ansible-playbook -i inventories/{{datacenter}}/inventory.ini playbook/tag_nsq-nsqlookupd.yaml
+ansible-playbook -i inventories/{{datacenter}}/inventory.ini playbook/tag_golang.yaml
+ansible-playbook -i inventories/{{datacenter}}/inventory.ini playbook/tag_docker.yaml
+
+##### GCP #####
+ansible-playbook -i inventories/gcp/inventory.ini playbook/tag_nsq-nsqadmin.yaml
+ansible-playbook -i inventories/gcp/inventory.ini playbook/tag_nsq-nsqd.yaml
+ansible-playbook -i inventories/gcp/inventory.ini playbook/tag_nsq-nsqlookupd.yaml
+ansible-playbook -i inventories/gcp/inventory.ini playbook/tag_golang.yaml
+ansible-playbook -i inventories/gcp/inventory.ini playbook/tag_docker.yaml
+
+
+###############################
+#      Dynamic Inventory      #
+###############################
+##### {{datacenter}} #####
+ansible-playbook -i inventories/{{datacenter}}/ playbook/tag_docker.yaml
+
+##### GCP #####
+ansible-playbook -i inventories/gcp/ playbook/tag_docker.yaml
+ansible-playbook -i inventories/gcp/ playbook/tag_nsq-nsqadmin.yaml
+ansible-playbook -i inventories/gcp/ playbook/tag_nsq-nsqd.yaml
+ansible-playbook -i inventories/gcp/ playbook/tag_nsq-nsqlookupd.yaml
+ansible-playbook -i inventories/gcp/ playbook/tag_golang.yaml
 ```
 
 ### **How To Run DocKube**
