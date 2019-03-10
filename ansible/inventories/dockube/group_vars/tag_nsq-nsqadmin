@@ -1,0 +1,12 @@
+---
+app_config:
+  nsqadmin:
+    server_hostname: nsqadmin-dockube.zeroc0d3lab.local
+
+app_host: '{{ nsq_network_address }}'
+app_port: 4150
+
+consul_tags: nsqadmin
+
+http_healthcheck:
+  - { port: 4151, path: '/info' }

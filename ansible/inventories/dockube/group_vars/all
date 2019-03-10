@@ -1,0 +1,43 @@
+---
+env                : dockube    # App level
+datacenter         : dc-dockube # Infra level
+locale             : en_US.UTF-8
+timezone           : Asia/Jakarta
+organization_name  : zeroc0d3lab
+remote_user        : root
+
+nopass_group       : sudo
+nopass_staff       : staff
+ansible_ssh_private_key_file: keys/dockube.pem
+trusted_ips        : 172.212.16.0/22
+logstokeep         : 7
+
+### Consul ###
+consul_host        : 172.212.1.212:8500
+consul_dc          : dockube
+consul_url         : consul.dockube.local
+consul_server_hosts:
+    - 172.212.1.1
+    - 172.212.1.2
+    - 172.212.1.3
+
+### NSQ Consul DNS ###
+nsqd_consul: "{{app_name}}.service.{{datacenter}}.consul"
+nsqlookupd_consul: "nsqlookupd.service.{{datacenter}}.consul"
+nsqadmin_consul: "nsqadmin.service.{{datacenter}}.consul"
+
+nsq_master : 172.212.0.6
+nsq_node   : 172.212.0.8
+nsq_nfs    : 172.212.0.11
+
+nsq_network_address: 127.0.0.1         # default instances
+nsq_lookupd_tcp_addresses:
+### NSQ Consul DNS ###
+  - "{{ nsqd_consul }}"
+  - "{{ nsqlookupd_consul }}"
+  - "{{ nsqadmin_consul }}"
+  - "{{ nsq_network_address }}"
+### NSQ Static DocKube ###
+  - "{{ nsq_master }}"
+  - "{{ nsq_node }}"
+  - "{{ nsq_nfs }}"

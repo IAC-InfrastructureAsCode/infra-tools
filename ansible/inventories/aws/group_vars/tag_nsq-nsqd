@@ -1,0 +1,12 @@
+---
+app_config:
+  nsqd:
+    server_hostname: nsqd-aws.zeroc0d3lab.local
+
+app_host: '{{ nsq_network_address }}'
+app_port: 4150
+
+consul_tags: nsqd
+
+http_healthcheck:
+  - { port: 4151, path: '/info' }
