@@ -1,0 +1,32 @@
+---
+language: python
+python: "2.7"
+
+# Use the new container infrastructure
+sudo: false
+
+# Install ansible
+addons:
+  apt:
+    packages:
+      - python-pip
+      - jq
+
+install:
+  # Install ansible netaddr
+  - pip install ansible netaddr
+
+  # Check ansible version
+  - ansible --version
+
+  # Create ansible.cfg with correct roles_path
+  # - printf '[defaults]\nroles_path=../' > ansible.cfg
+
+script:
+  # Basic role syntax check
+  - ANSIBLE_ROLES_PATH=.. ansible-playbook -i tests/inventory tests/test.yml --syntax-check
+  - ansible all -i localhost, -c local -m template -a "src=templates/config.json.j2 dest=./tests/test_results.json" --extra-vars=@tests/test_vars.yml
+  - cat ./tests/test_results.json | jq .
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
