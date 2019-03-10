@@ -1,0 +1,14 @@
+---
+- name: Install Python
+  hosts: '{{ playbook_host }}'
+  remote_user: '{{ remote_user }}'
+  become: yes
+  become_user: root
+  gather_facts: false
+  tasks:
+    # - name: Wait 30 seconds for GCP to finish initial system setup
+    #   raw: sleep 30
+    #   when: packer_build_name is defined and packer_build_name == "googlecompute"
+
+    - name: Install Python 2.x
+      raw: test -e /usr/bin/python || (apt-get -y update && apt-get install -y python-minimal)

@@ -1,11 +1,14 @@
 ---
+- import_playbook: ansible-pretasks.yaml  playbook_host=dockube-all
+
 - name: Setup Docker & Docker Compose
   hosts: dockube-all
-  #remote_user: '{{ remote_user }}'
-  sudo: yes
+  remote_user: '{{ remote_user }}'
+  become: yes
+  become_user: root
 
   vars:
-    app_name: dockube-docker
+    app_name: docker
     docker_edition: ce
     docker_channel: ["stable"]
     docker_version: "18.06.1"

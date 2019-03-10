@@ -1,0 +1,18 @@
+---
+- import_playbook: ansible-pretasks.yaml  playbook_host=tag_nsq-nsqlookupd
+
+- name: Setup nsqlookupd service
+  hosts: tag_nsq-nsqlookupd
+  remote_user: '{{ remote_user }}'
+  become: yes
+  become_user: root
+
+  vars:
+    app_name: nsqlookupd
+    nsqd_role: true
+    nsqlookupd_role: true
+    nsq_network_address: '{{ ansible_default_ipv4.address }}'
+
+  roles:
+    - consul
+    - nsq

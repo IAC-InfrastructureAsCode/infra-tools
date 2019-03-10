@@ -1,0 +1,15 @@
+---
+- import_playbook: ansible-pretasks.yaml  playbook_host=tag_golang
+
+- name: Setup Golang
+  hosts: tag_golang
+  remote_user: '{{ remote_user }}'
+  become: yes
+  become_user: root
+
+  vars:
+    app_name: golang
+    golang_version: 1.11.1
+
+  roles:
+    - golang

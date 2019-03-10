@@ -1,0 +1,19 @@
+---
+- import_playbook: ansible-pretasks.yaml  playbook_host=dockube-master
+
+- name: Setup nsqadmin service
+  hosts: dockube-master
+  remote_user: '{{ remote_user }}'
+  become: yes
+  become_user: root
+
+  vars:
+    app_name: nsqadmin
+    nsqd_role: true
+    nsqadmin_role: true
+    nsqlookupd_role: true
+    nsq_network_address: 172.212.0.6   #'{{ ansible_default_ipv4.address }}'
+
+  roles:
+    #- consul
+    - nsq
