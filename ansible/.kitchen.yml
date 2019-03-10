@@ -22,8 +22,8 @@ provisioner:
   idempotency_test: true
 
 platforms:
-  - name: centos-7.2
-  - name: ubuntu-15.04
+  - name: centos-7.4
+  - name: ubuntu-18.04
 
 suites:
   - name: default
