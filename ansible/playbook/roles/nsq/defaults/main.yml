@@ -8,8 +8,8 @@ nsqlookupd_role: false
 nsq_owner: root
 nsq_group: root
 
-nsq_version: 0.3.8
-nsq_go_version: go1.6.2
+nsq_version: 1.1.0
+nsq_go_version: go1.10.3
 nsq_arch: linux-amd64
 
 nsq_install_directory: /usr/local
@@ -21,7 +21,7 @@ nsq_data_directory: /var/lib/nsq
 nsq_data_directory_mode: 0750
 
 nsq_binaries:
-  - nsq_pubsub
+# - nsq_pubsub     # depreciate from version 1.1.0
   - nsq_stat
   - nsq_tail
   - nsq_to_file
@@ -127,7 +127,8 @@ nsq_nsqd:
   #  require TLS for client connections (true, false, tcp_https)
   tls_root_ca_file:
   #  path to certificate authority file
-  worker_id: 255
+  # worker_id: 255        # (depreciate in version 1.1.0)
+  node_id: 255            # (use only from version 1.1.0+)
   #  unique seed for message ID generation (int) in range [0,4096) (will default to a hash of hostname) (default 225)
 
 nsq_nsqadmin:
