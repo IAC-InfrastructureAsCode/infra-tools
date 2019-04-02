@@ -13,7 +13,7 @@ apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-conf
 	make \
 	pkg-config
 
-export GOLANG_VERSION=1.11.1
+export GOLANG_VERSION=1.12.1
 export goRelArch=amd64
 export goRelSha256=2871270d8ff0c8c69f161aaae42f9f28739855ff5c5204752a8d92a1c9f63993
 
@@ -39,3 +39,7 @@ echo 'export GOROOT=/usr/local/go' >> ~/.profile
 echo 'export PATH=$PATH:$GOROOT/bin:$GOPATH/bin' >> ~/.profile
 
 # source ~/.profile
+/bin/bash -c "source ~/.profile"
+
+### Install Dep (Golang Package Manager) ###
+curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
