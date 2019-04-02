@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+export ANSIBLE_NAMESPACE="ansible"
+export CLUSTER=""
+export INFRA_CONTEXT=""
+export INFRA_CONTEXT_ALT=""
+export CLUSTER_ZONE=""
+
+echo "Verifying your kubectl installation..."
+if [ -z $(command -v kubectl) ]; then
+    echo -e "Please install and configure your kubectl\n"
+
+    echo -e "Configure our platform credentials by running this command:\n"
+    echo -e "    gcloud container clusters get-credentials $CLUSTER \\
+        --project $INFRA_CONTEXT \\
+        --zone $CLUSTER_ZONE\n"
+    exit 1
+fi
+
+# echo "Using $INFRA_CONTEXT context..."
+# kubectl config use-context "$INFRA_CONTEXT"
+# rc=$?
+# if [ $rc -ne 0 ]; then
+#     kubectl config use-context "$INFRA_CONTEXT_ALT"
+#     rc=$?
+#     if [ $rc -ne 0 ]; then
+#         echo "Error changing kubectl context"
+#         exit $rc
+#     fi
+# fi
+
+echo "Spawning bash shell inside ansible pod..."
+export ANSIBLE_POD_NAME="$(kubectl get pod -n "$ANSIBLE_NAMESPACE" -o jsonpath='{.items[0].metadata.name}')"
+kubectl exec "$ANSIBLE_POD_NAME" -n "$ANSIBLE_NAMESPACE" -it -- /bin/bash
