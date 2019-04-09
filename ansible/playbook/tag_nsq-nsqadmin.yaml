@@ -5,13 +5,10 @@
   hosts: tag_nsq-nsqadmin
   remote_user: '{{ remote_user }}'
   become: yes
-  become_user: root
 
   vars:
     app_name: nsqadmin
-    nsqd_role: true
     nsqadmin_role: true
-    nsqlookupd_role: true
     nsq_network_address: '{{ ansible_default_ipv4.address }}'
 
   roles:

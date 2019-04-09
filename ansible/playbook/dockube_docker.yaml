@@ -5,7 +5,6 @@
   hosts: dockube-all
   remote_user: '{{ remote_user }}'
   become: yes
-  become_user: root
 
   vars:
     app_name: docker

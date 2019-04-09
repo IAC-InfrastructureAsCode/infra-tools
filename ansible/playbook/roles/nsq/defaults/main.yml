@@ -1,9 +1,9 @@
 ---
 # defaults file for ansible-nsq
 
-nsqd_role: false
+nsqd_role: true
 nsqadmin_role: false
-nsqlookupd_role: false
+nsqlookupd_role: true
 
 nsq_owner: root
 nsq_group: root

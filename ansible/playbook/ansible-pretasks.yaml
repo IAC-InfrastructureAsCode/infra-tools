@@ -3,8 +3,8 @@
   hosts: '{{ playbook_host }}'
   remote_user: '{{ remote_user }}'
   become: yes
-  become_user: root
   gather_facts: false
+
   tasks:
     # - name: Wait 30 seconds for GCP to finish initial system setup
     #   raw: sleep 30
