@@ -1,7 +1,12 @@
 #!/usr/bin/env sh
 
 ### Symlink Node Binary ###
-export NODE_VERSION="10.15.3"
+if [ -n "$1" ]; then
+	export NODE_VERSION=$1
+else
+    export NODE_VERSION=${node_version:-10.15.3}
+fi
+
 export BIN_NODE="/root/.nvm/versions/node/v$NODE_VERSION/bin/node"
 export WHICH_BINARY=`which node`
 export NODE_PATH="/usr/bin/node"

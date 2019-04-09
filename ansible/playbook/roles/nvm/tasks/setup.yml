@@ -25,8 +25,8 @@
   with_items:
     - install
 
-- name: Install node
-  shell: bash /tmp/{{ item }}.sh
+- name: Install node ver-{{node_version}}
+  shell: bash /tmp/{{ item }}.sh {{node_version}}
   with_items:
     - install
 
@@ -36,12 +36,12 @@
 # - name: Activate node
 #   shell: nvm use {{ node_version }}
 
-- name: Copy symlink node
+- name: Copy symlink node ver-{{node_version}}
   copy: src="{{ item }}.sh" dest="/tmp/{{ item }}.sh"
   with_items:
     - symlink
 
-- name: Symlink node
-  shell: bash /tmp/{{ item }}.sh
+- name: Symlink node ver-{{node_version}}
+  shell: bash /tmp/{{ item }}.sh {{node_version}}
   with_items:
     - symlink

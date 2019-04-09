@@ -1,13 +1,19 @@
 #!/usr/bin/env sh
 
+### Set Node Version ###
+if [ -n "$1" ]; then
+	export NODE_VERSION=$1
+else
+    export NODE_VERSION=${node_version:-10.15.3}
+fi
+
+### Update & Install Ubuntu Library ###
 apt-get update
 apt-get install -y \
   git \
   g++ \
   make \
   s3cmd
-
-NODE_VERSION=${node_version:-10.15}
 
 ### Path NVM (NodeJS Version Manager) ###
 export NVM_ROOT="$HOME/.nvm"

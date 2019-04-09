@@ -1,0 +1,14 @@
+---
+- import_playbook: ansible-pretasks.yaml  playbook_host=tag_nvm
+
+- name: Setup NVM (Node Version Manager)
+  hosts: tag_nvm
+  remote_user: '{{ remote_user }}'
+  become: yes
+  become_user: root
+
+  vars:
+    app_name: nvm
+
+  roles:
+    - { role: nvm, tags: ["nvm"], node_version: 10.15.3 }
