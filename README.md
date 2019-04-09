@@ -52,6 +52,13 @@ ansible-playbook -i inventories/{{datacenter}}/inventory.ini playbook/tag_nsq-ns
 ansible-playbook -i inventories/{{datacenter}}/inventory.ini playbook/tag_golang.yaml
 ansible-playbook -i inventories/{{datacenter}}/inventory.ini playbook/tag_docker.yaml
 
+##### Aliyun (Alibaba Cloud) #####
+ansible-playbook -i inventories/aliyun/inventory.ini playbook/tag_nsq-nsqadmin.yaml
+ansible-playbook -i inventories/aliyun/inventory.ini playbook/tag_nsq-nsqd.yaml
+ansible-playbook -i inventories/aliyun/inventory.ini playbook/tag_nsq-nsqlookupd.yaml
+ansible-playbook -i inventories/aliyun/inventory.ini playbook/tag_golang.yaml
+ansible-playbook -i inventories/aliyun/inventory.ini playbook/tag_docker.yaml
+
 ##### GCP #####
 ansible-playbook -i inventories/gcp/inventory.ini playbook/tag_nsq-nsqadmin.yaml
 ansible-playbook -i inventories/gcp/inventory.ini playbook/tag_nsq-nsqd.yaml
@@ -66,12 +73,19 @@ ansible-playbook -i inventories/gcp/inventory.ini playbook/tag_docker.yaml
 ##### {{datacenter}} #####
 ansible-playbook -i inventories/{{datacenter}}/ playbook/tag_docker.yaml
 
+##### Aliyun (Alibaba Cloud) #####
+ansible-playbook -i inventories/aliyun/alicloud.py playbook/tag_docker.yaml
+ansible-playbook -i inventories/aliyun/alicloud.py playbook/tag_nsq-nsqadmin.yaml
+ansible-playbook -i inventories/aliyun/alicloud.py playbook/tag_nsq-nsqd.yaml
+ansible-playbook -i inventories/aliyun/alicloud.py playbook/tag_nsq-nsqlookupd.yaml
+ansible-playbook -i inventories/aliyun/alicloud.py playbook/tag_golang.yaml
+
 ##### GCP #####
-ansible-playbook -i inventories/gcp/ playbook/tag_docker.yaml
-ansible-playbook -i inventories/gcp/ playbook/tag_nsq-nsqadmin.yaml
-ansible-playbook -i inventories/gcp/ playbook/tag_nsq-nsqd.yaml
-ansible-playbook -i inventories/gcp/ playbook/tag_nsq-nsqlookupd.yaml
-ansible-playbook -i inventories/gcp/ playbook/tag_golang.yaml
+ansible-playbook -i inventories/gcp/gce.py playbook/tag_docker.yaml
+ansible-playbook -i inventories/gcp/gce.py playbook/tag_nsq-nsqadmin.yaml
+ansible-playbook -i inventories/gcp/gce.py playbook/tag_nsq-nsqd.yaml
+ansible-playbook -i inventories/gcp/gce.py playbook/tag_nsq-nsqlookupd.yaml
+ansible-playbook -i inventories/gcp/gce.py playbook/tag_golang.yaml
 ```
 
 ### **How To Run DocKube**
