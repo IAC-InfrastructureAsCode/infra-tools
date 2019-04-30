@@ -4,7 +4,7 @@ version: '2'   # IT MUST version 2 for support "ip_range"
 # NETWORK SETUP
 #================================================================================================
 networks:
-  nfndp-net:
+  framework-net:
     driver: ${NETWORKS_DRIVER}
     ipam:
       config:
@@ -60,7 +60,7 @@ services:
       - CONSULTEMPLATE_VERSION=${CONSULTEMPLATE_VERSION}
       - CONSUL_OPTIONS=-server -bootstrap-expect 1 -client 0.0.0.0 -ui    # minimal server options
     networks:
-      nfndp-net:
+      framework-net:
         ipv4_address: 172.215.0.3
 #================================================================================================
 # ADMINER
@@ -79,7 +79,7 @@ services:
       - ADMINER_VERSION=${ADMINER_VERSION}
       - INSTALL_MSSQL=${INSTALL_MSSQL}
     networks:
-      nfndp-net:
+      framework-net:
         ipv4_address: 172.215.0.4
 
 #================================================================================================
@@ -97,7 +97,7 @@ services:
     ports:
       - "${ALERTMANAGER_PORT}:9093"
     networks:
-      nfndp-net:
+      framework-net:
         ipv4_address: 172.215.0.5
 
 #================================================================================================
@@ -118,7 +118,7 @@ services:
       - ADMIN_USER=laradock
       - ADMIN_PASSWORD=password
     networks:
-      nfndp-net:
+      framework-net:
         ipv4_address: 172.215.0.6
 
 #================================================================================================
@@ -137,7 +137,7 @@ services:
     ports:
       - "${CADVISOR_PORT}:3000"
     networks:
-      nfndp-net:
+      framework-net:
         ipv4_address: 172.215.0.7
 
 #================================================================================================
@@ -164,7 +164,7 @@ services:
       #- GF_AWS_default_SECRET_ACCESS_KEY=${GF_AWS_default_SECRET_ACCESS_KEY}
       #- GF_AWS_default_REGION=${GF_AWS_default_REGION}
     networks:
-      nfndp-net:
+      framework-net:
         ipv4_address: 172.215.0.8
 
 #================================================================================================
@@ -189,7 +189,7 @@ services:
       - MYSQL_USER=${MARIADB_USER}                                   # grant user name (optional)
       - MYSQL_PASSWORD=${MARIADB_PASSWORD}                           # grant user password (optional)
     networks:
-      nfndp-net:
+      framework-net:
         ipv4_address: 172.215.0.9
 
 #================================================================================================
@@ -218,7 +218,7 @@ services:
       - MONGO_USER=${MONGO_USER}
       - MONGO_PASSWORD=${MONGO_PASSWORD}
     networks:
-      nfndp-net:
+      framework-net:
         ipv4_address: 172.215.0.10
 
 #================================================================================================
@@ -245,7 +245,7 @@ services:
       - MYSQL_USER=${MYSQL_USER}                                     # grant user name (optional)
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}                             # grant user password (optional)
     networks:
-      nfndp-net:
+      framework-net:
         ipv4_address: 172.215.0.11
 
 #================================================================================================
@@ -268,7 +268,7 @@ services:
     ports:
       - "${NODEEXPORTER_PORT}:9100"
     networks:
-      nfndp-net:
+      framework-net:
         ipv4_address: 172.215.0.12
 
 #================================================================================================
@@ -295,7 +295,7 @@ services:
       - MYSQL_USER=${PERCONA_USER}                                   # grant user name (optional)
       - MYSQL_PASSWORD=${PERCONA_PASSWORD}                           # grant user password (optional)
     networks:
-      nfndp-net:
+      framework-net:
         ipv4_address: 172.215.0.13
 
 #================================================================================================
@@ -319,7 +319,7 @@ services:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
     networks:
-      nfndp-net:
+      framework-net:
         ipv4_address: 172.215.0.14
 
 #================================================================================================
@@ -350,7 +350,7 @@ services:
       - MYSQL_PASSWORD=${PMA_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${PMA_ROOT_PASSWORD}
     networks:
-      nfndp-net:
+      framework-net:
         ipv4_address: 172.215.0.15
 
 #================================================================================================
@@ -370,7 +370,7 @@ services:
     environment:
       - PORTAINER_VERSION=${PORTAINER_VERSION}
     networks:
-      nfndp-net:
+      framework-net:
         ipv4_address: 172.215.0.16
 
 #================================================================================================
@@ -393,7 +393,7 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}                               # grant user name (optional)
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}                       # grant user password (optional)
     networks:
-      nfndp-net:
+      framework-net:
         ipv4_address: 172.215.0.17
 
 #================================================================================================
@@ -419,7 +419,7 @@ services:
     ports:
       - "${PROMETHEUS_PORT}:9090"
     networks:
-      nfndp-net:
+      framework-net:
         ipv4_address: 172.215.0.18
 
 #================================================================================================
@@ -432,7 +432,7 @@ services:
     ports:
       - "${PUSHGATEWAY_PORT}:9091"
     networks:
-      nfndp-net:
+      framework-net:
         ipv4_address: 172.215.0.19
 
 #================================================================================================
@@ -451,5 +451,5 @@ services:
     environment:
       - REDIS_VERSION=${REDIS_VERSION}
     networks:
-      nfndp-net:
+      framework-net:
         ipv4_address: 172.215.0.20

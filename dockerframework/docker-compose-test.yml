@@ -4,7 +4,7 @@ version: '2'   # IT MUST version 2 for support "ip_range"
 # NETWORK SETUP
 #================================================================================================
 networks:
-  nfndp-net:
+  framework-net:
     driver: ${NETWORKS_DRIVER}
 
 #================================================================================================
@@ -55,7 +55,7 @@ services:
       - CONSULTEMPLATE_VERSION=${CONSULTEMPLATE_VERSION}
       - CONSUL_OPTIONS=-server -bootstrap-expect 1 -client 0.0.0.0 -ui    # minimal server options
     networks:
-      - nfndp-net
+      - framework-net
 
 #================================================================================================
 # ADMINER
@@ -74,7 +74,7 @@ services:
       - ADMINER_VERSION=${ADMINER_VERSION}
       - INSTALL_MSSQL=${INSTALL_MSSQL}
     networks:
-      - nfndp-net
+      - framework-net
 
 #================================================================================================
 # ALERTMANAGER
@@ -91,7 +91,7 @@ services:
     ports:
       - "${ALERTMANAGER_PORT}:9093"
     networks:
-      - nfndp-net
+      - framework-net
 
 #================================================================================================
 # CADDY
@@ -111,7 +111,7 @@ services:
       - ADMIN_USER=laradock
       - ADMIN_PASSWORD=password
     networks:
-      - nfndp-net
+      - framework-net
 
 #================================================================================================
 # CADVISOR
@@ -129,7 +129,7 @@ services:
     ports:
       - "${CADVISOR_PORT}:3000"
     networks:
-      - nfndp-net
+      - framework-net
 
 #================================================================================================
 # GRAFANA
@@ -155,7 +155,7 @@ services:
       #- GF_AWS_default_SECRET_ACCESS_KEY=${GF_AWS_default_SECRET_ACCESS_KEY}
       #- GF_AWS_default_REGION=${GF_AWS_default_REGION}
     networks:
-      - nfndp-net
+      - framework-net
 
 #================================================================================================
 # MARIADB
@@ -179,7 +179,7 @@ services:
       - MYSQL_USER=${MARIADB_USER}                                   # grant user name (optional)
       - MYSQL_PASSWORD=${MARIADB_PASSWORD}                           # grant user password (optional)
     networks:
-      - nfndp-net
+      - framework-net
 
 #================================================================================================
 # MONGODB
@@ -207,7 +207,7 @@ services:
       - MONGO_USER=${MONGO_USER}
       - MONGO_PASSWORD=${MONGO_PASSWORD}
     networks:
-      - nfndp-net
+      - framework-net
 
 #================================================================================================
 # MYSQL
@@ -233,7 +233,7 @@ services:
       - MYSQL_USER=${MYSQL_USER}                                     # grant user name (optional)
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}                             # grant user password (optional)
     networks:
-      - nfndp-net
+      - framework-net
 
 #================================================================================================
 # NODEEXPORTER
@@ -255,7 +255,7 @@ services:
     ports:
       - "${NODEEXPORTER_PORT}:9100"
     networks:
-      - nfndp-net
+      - framework-net
 
 #================================================================================================
 # PERCONA
@@ -281,7 +281,7 @@ services:
       - MYSQL_USER=${PERCONA_USER}                                   # grant user name (optional)
       - MYSQL_PASSWORD=${PERCONA_PASSWORD}                           # grant user password (optional)
     networks:
-      - nfndp-net
+      - framework-net
 
 #================================================================================================
 # PGADMIN
@@ -304,7 +304,7 @@ services:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
     networks:
-      - nfndp-net
+      - framework-net
 
 #================================================================================================
 # PHPMYADMIN
@@ -334,7 +334,7 @@ services:
       - MYSQL_PASSWORD=${PMA_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${PMA_ROOT_PASSWORD}
     networks:
-      - nfndp-net
+      - framework-net
 
 #================================================================================================
 # PORTAINER
@@ -353,7 +353,7 @@ services:
     environment:
       - PORTAINER_VERSION=${PORTAINER_VERSION}
     networks:
-      - nfndp-net
+      - framework-net
 
 #================================================================================================
 # POSTGRESQL
@@ -375,7 +375,7 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}                               # grant user name (optional)
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}                       # grant user password (optional)
     networks:
-      - nfndp-net
+      - framework-net
 
 #================================================================================================
 # PROMETHEUS
@@ -400,7 +400,7 @@ services:
     ports:
       - "${PROMETHEUS_PORT}:9090"
     networks:
-      - nfndp-net
+      - framework-net
 
 #================================================================================================
 # PUSHGATEWAY
@@ -412,7 +412,7 @@ services:
     ports:
       - "${PUSHGATEWAY_PORT}:9091"
     networks:
-      - nfndp-net
+      - framework-net
 
 #================================================================================================
 # REDIS
@@ -430,4 +430,4 @@ services:
     environment:
       - REDIS_VERSION=${REDIS_VERSION}
     networks:
-      - nfndp-net
+      - framework-net
