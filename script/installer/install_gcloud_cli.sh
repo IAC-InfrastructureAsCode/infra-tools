@@ -16,7 +16,7 @@ apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-conf
   openssh-client
 
 
-export GCLOUD_VERSION="240.0.0"
+export GCLOUD_VERSION="250.0.0"
 export COMPRESS_FILE="google-cloud-sdk-$GCLOUD_VERSION-linux-x86_64.tar.gz"
 
 cd /tmp
