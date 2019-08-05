@@ -9,6 +9,7 @@
 export DEBIAN_FRONTEND=noninteractive
 export DOCKER_PATH="/usr/bin/docker"
 export DOCKER_COMPOSE_PATH="/usr/local/bin/docker-compose"
+export DOCKER_COMPOSE_VERSION="1.24.1"
 export USER_NAME=`echo $USER`
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -25,7 +26,7 @@ apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-conf
 # ================================================================================================
 #  INSTALL DOCKER-COMPOSE
 # ================================================================================================
-curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o $DOCKER_COMPOSE_PATH
+curl -L https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-`uname -s`-`uname -m` -o $DOCKER_COMPOSE_PATH
 
 chmod +x /usr/local/bin/docker-compose
 
