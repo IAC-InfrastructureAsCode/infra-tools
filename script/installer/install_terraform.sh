@@ -5,7 +5,7 @@
 # ================================================================================================
 export DEBIAN_FRONTEND=noninteractive
 
-export TERRAFORM_VERSION="0.11.11"
+export TERRAFORM_VERSION="0.12.6"
 
 if ! [ "${TF_VERSION}" = "" ]
 then
