@@ -1,0 +1,141 @@
+version: '3.5'   # IT MUST version 2 for support "ip_range"
+
+#================================================================================================
+# NETWORK SETUP
+#================================================================================================
+networks:
+  dockube-net:
+    ipam:
+      driver: ${NETWORKS_DRIVER}
+      config:
+        - subnet: 172.212.0.0/16      # 65534 Hosts / Net
+          #ip_range: 172.212.5.0/24
+          gateway: 172.212.5.254
+
+#================================================================================================
+# VOLUME SETUP
+#================================================================================================
+volumes:
+  dockube-master:
+    driver: ${VOLUMES_DRIVER}
+  dockube-node:
+    driver: ${VOLUMES_DRIVER}
+  portainer:
+    driver: ${VOLUMES_DRIVER}
+
+services:
+#================================================================================================
+# PORTAINER
+#================================================================================================
+  portainer:
+    restart: unless-stopped
+    build:
+      context: ./dockube/portainer/${PORTAINER_VERSION}
+    container_name: infra_dockube_portainer
+    hostname: dockube-portainer
+    #domainname: dockube-portainer
+    ports:
+      - "${PORTAINER_PORT}:9000"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${DATA_PORTAINER}:/data                                      # volume for data
+    environment:
+      - PORTAINER_VERSION=${PORTAINER_VERSION}
+    privileged: true
+    networks:
+      dockube-net:
+        ipv4_address: 172.212.0.5
+
+#================================================================================================
+# MASTER
+#================================================================================================
+  dockube-master:
+    restart: unless-stopped
+    image: dockube/dockube-master:16.04
+    container_name: infra_dockube_master
+    hostname: dockube-master
+    #domainname: dockube-master
+    expose:
+      - "22"
+      - "22/tcp"
+      - "2379"
+      - "2379/tcp"
+      - "6443"
+      - "6443/tcp"
+      - "10251"
+      - "10251/tcp"
+    ports:
+      - ${MASTER_PORT}:22/tcp
+    ### DO NOT USE FOR "docker registry / build images" ###
+    # volumes:
+    #   - /etc/localtime:/etc/localtime:ro
+    #   - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - UBUNTU_VERSION=${UBUNTU_VERSION}
+    privileged: true
+    networks:
+      dockube-net:
+        ipv4_address: 172.212.0.6
+
+#================================================================================================
+# NODE
+#================================================================================================
+  dockube-node:
+    restart: unless-stopped
+    image: dockube/dockube-master:16.04
+    container_name: infra_dockube_node
+    hostname: dockube-node
+    #domainname: dockube-node
+    expose:
+      - "22"
+      - "22/tcp"
+      - "2379"
+      - "2379/tcp"
+      - "6443"
+      - "6443/tcp"
+      - "10251"
+      - "10251/tcp"
+    ports:
+      - "${NODE_PORT}:22/tcp"
+    ### DO NOT USE FOR "docker registry / build images" ###
+    # volumes:
+    #   - /etc/localtime:/etc/localtime:ro
+    #   - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - UBUNTU_VERSION=${UBUNTU_VERSION}
+    privileged: true
+    networks:
+      dockube-net:
+        ipv4_address: 172.212.0.8
+
+#================================================================================================
+# NFS (Network File System)
+#================================================================================================
+  dockube-nfs:
+    restart: unless-stopped
+    image: dockube/dockube-nfs:16.04
+    container_name: infra_dockube_nfs
+    hostname: dockube-nfs
+    #domainname: dockube-nfs
+    expose:
+      - "22"
+      - "22/tcp"
+      - "2379"
+      - "2379/tcp"
+      - "6443"
+      - "6443/tcp"
+      - "10251"
+      - "10251/tcp"
+    ports:
+      - "${NFS_PORT}:22/tcp"
+    ### DO NOT USE FOR "docker registry / build images" ###
+    # volumes:
+    #   - /etc/localtime:/etc/localtime:ro
+    #   - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - UBUNTU_VERSION=${UBUNTU_VERSION}
+    privileged: true
+    networks:
+      dockube-net:
+        ipv4_address: 172.212.0.11
