@@ -1,4 +1,4 @@
-version: '2'   # IT MUST version 2 for support "ip_range"
+version: '3.5'   # IT MUST version 2 for support "ip_range"
 
 #================================================================================================
 # NETWORK SETUP
@@ -9,8 +9,8 @@ networks:
     ipam:
       config:
         - subnet: 172.212.0.0/16      # 65534 Hosts / Net
-          ip_range: 172.212.5.0/24
-          gateway: 172.212.5.254
+          #ip_range: 172.212.5.0/24
+          #gateway: 172.212.5.254
 
 #================================================================================================
 # VOLUME SETUP
