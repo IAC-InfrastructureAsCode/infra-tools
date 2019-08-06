@@ -4,3 +4,4 @@ log/
 vendor/
 workspace/
 .env
+.vscode/
