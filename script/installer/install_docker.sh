@@ -10,7 +10,7 @@ export DEBIAN_FRONTEND=noninteractive
 export DOCKER_PATH="/usr/bin/docker"
 export DOCKER_COMPOSE_PATH="/usr/local/bin/docker-compose"
 export DOCKER_COMPOSE_VERSION="1.24.1"
-export USER_NAME=`echo $USER`
+export USERNAME=`echo $USER`
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
@@ -30,8 +30,17 @@ curl -L https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERS
 
 chmod +x /usr/local/bin/docker-compose
 
+##### CUSTOMIZE ~/.profile #####
+echo '' >> ~/.profile
+echo '### Docker ###
+export DOCKER_CLIENT_TIMEOUT=300
+export COMPOSE_HTTP_TIMEOUT=300' >> ~/.profile
+
+# reload source ~/.profile
+/bin/bash -c "source ~/.profile"
+
 ##### CONFIGURE DOCKER #####
-usermod -aG docker $USER_NAME
+usermod -aG docker $USERNAME
 
 ln -snf $DOCKER_PATH /usr/local/bin/dock
 ln -snf $DOCKER_COMPOSE_PATH /usr/local/bin/dockc

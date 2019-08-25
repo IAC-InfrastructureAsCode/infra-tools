@@ -34,11 +34,14 @@ rm -f go${GOLANG_VERSION}.linux-${goRelArch}.tar.gz
 
 mkdir -p $HOME/go
 
-echo 'export GOPATH=$HOME/go' >> ~/.profile
-echo 'export GOROOT=/usr/local/go' >> ~/.profile
-echo 'export PATH=$PATH:$GOROOT/bin:$GOPATH/bin' >> ~/.profile
+##### CUSTOMIZE ~/.profile #####
+echo '' >> ~/.profile
+echo '### GO-Lang $GOPATH ###
+export GOPATH=$HOME/go
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin' >> ~/.profile
 
-# source ~/.profile
+# reload source ~/.profile
 /bin/bash -c "source ~/.profile"
 
 ### Install Dep (Golang Package Manager) ###
