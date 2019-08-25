@@ -2,7 +2,7 @@
 
 ### Path Ruby RBENV / RVM ###
 export RBENV_ROOT="$HOME/.rbenv"
-export RVM_ROOT="/usr/local/rvm"
+export RVM_ROOT="$HOME/.rvm"
 
 ### rbenv (Ruby) default ###
 if [ -d "$RBENV_ROOT" ]
@@ -70,3 +70,9 @@ if [[ $- == *i* ]]; then
     export SHELL=zsh
     exec zsh -l
 fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/tmp/google-cloud-sdk/path.zsh.inc' ]; then . '/tmp/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/tmp/google-cloud-sdk/completion.zsh.inc' ]; then . '/tmp/google-cloud-sdk/completion.zsh.inc'; fi
