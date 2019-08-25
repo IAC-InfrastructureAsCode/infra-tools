@@ -9,8 +9,6 @@ networks:
     ipam:
       config:
         - subnet: 172.212.0.0/16      # 65534 Hosts / Net
-          #ip_range: 172.212.5.0/24
-          #gateway: 172.212.5.254
 
 #================================================================================================
 # VOLUME SETUP
@@ -33,7 +31,6 @@ services:
       context: ./dockube/portainer/${PORTAINER_VERSION}
     container_name: infra_dockube_portainer
     hostname: dockube-portainer
-    #domainname: dockube-portainer
     ports:
       - "${PORTAINER_PORT}:9000"
     volumes:
@@ -58,7 +55,6 @@ services:
         - INSTALL_GOLANG=${WORKSPACE_INSTALL_GOLANG}
     container_name: infra_dockube_master
     hostname: dockube-master
-    #domainname: dockube-master
     expose:
       - "22"
       - "22/tcp"
@@ -92,7 +88,6 @@ services:
         - INSTALL_GOLANG=${WORKSPACE_INSTALL_GOLANG}
     container_name: infra_dockube_node
     hostname: dockube-node
-    #domainname: dockube-node
     expose:
       - "22"
       - "22/tcp"
@@ -126,7 +121,6 @@ services:
         - INSTALL_GOLANG=${WORKSPACE_INSTALL_GOLANG}
     container_name: infra_dockube_nfs
     hostname: dockube-nfs
-    #domainname: dockube-nfs
     expose:
       - "22"
       - "22/tcp"
