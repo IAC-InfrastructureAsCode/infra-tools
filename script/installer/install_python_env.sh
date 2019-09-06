@@ -19,10 +19,10 @@ apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-conf
 
 ### Cleanup old python ###
 apt-get remove python
-rm -rf /usr/local/bin/pip
+rm -rf /usr/bin/pip
 
 export PYTHON2_VER="2.7.15"
-export PYTHON3_VER="3.7.3"
+export PYTHON3_VER="3.7.4"
 export PATH_PYENV="$HOME/.pyenv"
 git clone git@github.com:pyenv/pyenv.git "$PATH_PYENV"
 
@@ -49,7 +49,6 @@ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
   && pip install coverage junit-xml
 
 pip3 install --upgrade pip
-
 
 ### Setup python environment global ###
 pyenv global $PYTHON2_VER
