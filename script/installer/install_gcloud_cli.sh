@@ -30,17 +30,17 @@ bash ./install.sh
 ### Add this line to last ~/.bashrc ###
 #
 # The next line updates PATH for the Google Cloud SDK.
-# if [ -f '$HOME/google-cloud-sdk/path.bash.inc' ]; then . '$HOME/google-cloud-sdk/path.bash.inc'; fi
+# if [ -f $HOME'/google-cloud-sdk/path.bash.inc' ]; then . $HOME'/google-cloud-sdk/path.bash.inc'; fi
 #
 # The next line enables shell command completion for gcloud.
-# if [ -f '$HOME/google-cloud-sdk/completion.bash.inc' ]; then . '$HOME/google-cloud-sdk/completion.bash.inc'; fi
+# if [ -f $HOME'/google-cloud-sdk/completion.bash.inc' ]; then . $HOME'/google-cloud-sdk/completion.bash.inc'; fi
 #
 
 ### Add this line to last ~/.zshrc ###
 #
 # The next line updates PATH for the Google Cloud SDK.
-# if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/path.zsh.inc'; fi
+# if [ -f $HOME'/google-cloud-sdk/path.zsh.inc' ]; then . $HOME'/google-cloud-sdk/path.zsh.inc'; fi
 #
 # The next line enables shell command completion for gcloud.
-# if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
+# if [ -f $HOME'/google-cloud-sdk/completion.zsh.inc' ]; then . $HOME'/google-cloud-sdk/completion.zsh.inc'; fi
 #
